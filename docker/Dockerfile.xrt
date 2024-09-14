@@ -1,0 +1,32 @@
+# Copyright (C) 2025 Advanced Micro Devices, Inc. All rights reserved.
+# SPDX-License-Identifier: MIT
+
+ARG BASE_IMAGE=ubuntu:24.04
+FROM ${BASE_IMAGE}
+
+WORKDIR /XDNA
+
+# Suppress prompts in scripts
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y git curl bash wget
+
+COPY docker/build_xdna.sh /XDNA
+
+# We'll use the XDNA github repo to build both XRT and the XDNA driver
+RUN cd /XDNA && ./build_xdna.sh
+
+# Install XRT deps
+RUN /XDNA/xdna-driver/xrt/src/runtime_src/tools/scripts/xrtdeps.sh -docker
+
+# Install XRT
+RUN dpkg -i /XDNA/xdna-driver/xrt/build/Release/xrt*-base.deb
+
+# Finally, save the XRT/XDNA debian packages
+# these will also need to be installed on the host system
+RUN mkdir /XDNA/debs && \
+    cp /XDNA/xdna-driver/build/Release/xrt_*x86_64-amdxdna.deb /XDNA/debs/ && \
+    cp /XDNA/xdna-driver/xrt/build/Release/xrt*-base.deb /XDNA/debs/
+
+# Cleanup
+RUN rm -rf /XDNA/xdna-driver

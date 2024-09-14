@@ -1,0 +1,23 @@
+# Copyright (C) 2025 Advanced Micro Devices, Inc. All rights reserved.
+# SPDX-License-Identifier: MIT
+
+format: jb-book
+root: intro
+
+parts:
+  - caption: Blog
+    chapters:
+      - file: blog
+  - caption: NPUEval overview
+    chapters:
+      - file: installation
+      - file: alternative_compiler
+      - file: contributing
+      - file: license
+  - caption: Notebooks
+    chapters:
+    - file: notebooks/01_dataset_and_simple_completions
+    - file: notebooks/02_evaluating_solutions.ipynb
+    - file: notebooks/03_use_your_own_model.ipynb
+    - file: notebooks/04_adding_rag.ipynb
+
