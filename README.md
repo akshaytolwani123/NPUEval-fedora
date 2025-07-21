@@ -1,4 +1,4 @@
-[ [arxiv]() ] [ [blog]() ] [ [demo](notebooks/03_use_your_own_model.ipynb) ] [ [bibtex]() ]
+[ [arxiv]() ] [ [blog](https://amdresearch.github.io/NPUEval/blog.html) ] [ [demo](notebooks/03_use_your_own_model.ipynb) ] [ [bibtex]() ]
 
 ![](docs/header_small.png)
 
