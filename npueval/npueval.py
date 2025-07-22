@@ -69,7 +69,7 @@ def run_functional_tests(tests: List[Dict[str, Any]],
             # Get and validate kernel code
             if solutions is None:
                 print("Using canonical solution...")
-                kernel_code = test['prompt'] + test['canonical_solution'] + test['program_code']
+                kernel_code = test['prompt'][:-2] + test['canonical_solution'] + test['program_code']
             else:
                 kernel_code = get_kernel_code(test, solutions) + test['program_code']
             
