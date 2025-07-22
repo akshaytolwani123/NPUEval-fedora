@@ -1,4 +1,4 @@
-[ [arxiv]() ] [ [blog](https://amdresearch.github.io/NPUEval/blog.html) ] [ [demo](notebooks/03_use_your_own_model.ipynb) ] [ [bibtex]() ]
+[ [arxiv](https://arxiv.org/abs/2507.14403v1) ] [ [blog](https://amdresearch.github.io/NPUEval/blog.html) ] [ [demo](notebooks/03_use_your_own_model.ipynb) ] [ [bibtex](#bibtex) ]
 
 ![](docs/header_small.png)
 
@@ -53,3 +53,17 @@ docker_run_script.sh scripts/run_functional_tests.py
 * [AI Engine API User Guide](https://docs.amd.com/r/en-US/ug1079-ai-engine-kernel-coding/AI-Engine-API-Overview)
 * [MLIR-AIE](https://github.com/Xilinx/mlir-aie)
 * [LLVM-AIE](https://github.com/Xilinx/llvm-aie)
+
+## Bibtex
+
+```
+@misc{kalade2025npuevaloptimizingnpukernels,
+      title={NPUEval: Optimizing NPU Kernels with LLMs and Open Source Compilers}, 
+      author={Sarunas Kalade and Graham Schelle},
+      year={2025},
+      eprint={2507.14403},
+      archivePrefix={arXiv},
+      primaryClass={cs.PL},
+      url={https://arxiv.org/abs/2507.14403}, 
+}
+```
