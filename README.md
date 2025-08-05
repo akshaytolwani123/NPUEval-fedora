@@ -1,4 +1,4 @@
-[ [arxiv](https://arxiv.org/abs/2507.14403v1) ] [ [blog](https://amdresearch.github.io/NPUEval/blog.html) ] [ [demo](notebooks/03_use_your_own_model.ipynb) ] [ [bibtex](#bibtex) ]
+[ [arxiv](https://arxiv.org/abs/2507.14403v1) ] [ [blog](https://amdresearch.github.io/NPUEval/blog.html) ] [ [demo](demo/) ] [ [bibtex](#bibtex) ]
 
 ![](docs/header_small.png)
 
@@ -32,7 +32,7 @@ You'll be able to connect from your browser on port 8888, e.g. `http://localhost
 
 ## Reproducing results
 
-Currently there are 3 simple scripts to reproduce AIECoder results for gpt-4o and gpt-4o-mini. You can run these as regular scripts from your Jupyterlab or interactive docker session, or use `docker_run_script.sh` to run as individual docker sessions.
+Currently there are 2 simple scripts to reproduce AIECoder results for gpt-4o and gpt-4o-mini. You can run these as regular scripts from your Jupyterlab or interactive docker session, or use `docker_run_script.sh` to run as individual docker sessions.
 
 ```
 docker_run_script.sh scripts/run_completions.py
