@@ -32,14 +32,14 @@ You'll be able to connect from your browser on port 8888, e.g. `http://localhost
 
 ## Reproducing results
 
-Currently there are 2 simple scripts to reproduce AIECoder results for gpt-4o and gpt-4o-mini. You can run these as regular scripts from your Jupyterlab or interactive docker session, or use `docker_run_script.sh` to run as individual docker sessions.
+Currently there are 2 simple scripts to reproduce AIECoder results for gpt-4.1 and gpt-4o-mini. You can run these as regular scripts from your Jupyterlab or interactive docker session, or use `docker_run_script.sh` to run as individual docker sessions.
 
 ```
 docker_run_script.sh scripts/run_completions.py
 docker_run_script.sh scripts/run_functional_tests.py
 ```
 
-`run_completions` script will feed all the prompts to the AIECoder agent and generate solutions for each test. Make sure to set your `OPENAI_API_KEY` since it will be making requests to `gpt-4o` and `gpt-4o-mini`. 
+`run_completions` script will feed all the prompts to the AIECoder agent and generate solutions for each test. Make sure to set your `OPENAI_API_KEY` since it will be making requests to `gpt-4.1` and `gpt-4o-mini`. 
 `run_functional_tests` will evaluate the LLM generated solutions. Since this is just the evaluator it only requires the NPU and no access to an LLM.
 
 ## Known issues limitations

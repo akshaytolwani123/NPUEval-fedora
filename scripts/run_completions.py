@@ -12,7 +12,7 @@ from npueval.aiecoder import AIECoder
 with open("dataset/npueval.jsonl", 'r') as f:
     tests = [json.loads(line) for line in f]
 
-def generate_one_completion(prompt, model="gpt-3.5-turbo", base_url=None, temperature=0.0, top_p=1.0, attempts=1):
+def generate_one_completion(prompt, model="gpt-4.1", base_url=None, temperature=0.0, top_p=1.0, attempts=1):
     coder = AIECoder(model=model, temperature=temperature, top_p=top_p, base_url=base_url, attempts=attempts)
     response = coder(prompt)
     
@@ -27,7 +27,7 @@ def generate_one_completion(prompt, model="gpt-3.5-turbo", base_url=None, temper
 
 # Proprietary models
 N = [1, 2] # 1 - no compile just first pass, 2+ - retry with compiler
-models = ["gpt-4o-mini", "gpt-4o"]
+models = ["gpt-4o-mini", "gpt-4.1"]
 for MODEL in models:
     for attempts in N:
         print(f"{MODEL} N={attempts}")
@@ -60,7 +60,7 @@ for MODEL in models:
             
             if not os.path.exists(PERSIST_DIR):
                 print("Indexing...")
-                documents = SimpleDirectoryReader("rag/database/kernels", recursive=True).load_data()
+                documents = SimpleDirectoryReader("rag/kernels", recursive=True).load_data()
                 index = VectorStoreIndex.from_documents(documents)
                 index.storage_context.persist(persist_dir=PERSIST_DIR)
             else:
