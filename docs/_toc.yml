@@ -20,4 +20,5 @@ parts:
     - file: notebooks/02_evaluating_solutions.ipynb
     - file: notebooks/03_use_your_own_model.ipynb
     - file: notebooks/04_adding_rag.ipynb
+    - file: notebooks/05_measuring_speedup.ipynb
 
