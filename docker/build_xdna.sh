@@ -10,7 +10,7 @@ else
 fi
 
 cd xdna-driver
-git checkout 51b9400
+git checkout 0ad5aa3
 git submodule update --init --recursive
 
 ./tools/amdxdna_deps.sh

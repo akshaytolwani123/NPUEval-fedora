@@ -13,7 +13,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 SHELL ["/bin/bash", "-l", "-c"]
 
 # Install XDNA driver
-RUN dpkg -i /XDNA/debs/xrt_*x86_64-amdxdna.deb
+RUN dpkg -i /XDNA/debs/xrt_*amdxdna.deb
 
 RUN git clone --recursive https://github.com/xilinx/mlir-aie.git /IRON/mlir-aie && \
     cd /IRON/mlir-aie && \

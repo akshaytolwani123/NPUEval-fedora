@@ -25,7 +25,7 @@ RUN dpkg -i /XDNA/xdna-driver/xrt/build/Release/xrt*-base.deb
 # Finally, save the XRT/XDNA debian packages
 # these will also need to be installed on the host system
 RUN mkdir /XDNA/debs && \
-    cp /XDNA/xdna-driver/build/Release/xrt_*x86_64-amdxdna.deb /XDNA/debs/ && \
+    cp /XDNA/xdna-driver/build/Release/xrt*-amdxdna.deb /XDNA/debs/ && \
     cp /XDNA/xdna-driver/xrt/build/Release/xrt*-base.deb /XDNA/debs/
 
 # Cleanup
