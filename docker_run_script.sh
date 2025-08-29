@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: MIT
 
 # Copy running host version info from host to docker env
-cp /opt/xilinx/xrt/amdxdna/version.json $(pwd)
+cp /opt/xilinx/xrt/share/amdxdna/version.json $(pwd)
 
 docker run -it \
 	--device=/dev/accel/accel0:/dev/accel/accel0 \

@@ -10,7 +10,7 @@ def check_xrt_versions():
    and host system are the same to avoid device driver issues.
    '''
    host_file = "/host/version.json"
-   container_file = "/opt/xilinx/xrt/amdxdna/version.json"
+   container_file = "/opt/xilinx/xrt/share/amdxdna/version.json"
    
    if not os.path.exists(host_file):
        print(f"WARNING: Host version file not found at {host_file}")
