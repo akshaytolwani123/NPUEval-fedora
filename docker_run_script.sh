@@ -10,6 +10,6 @@ docker run -it \
 	--device=/dev/accel/accel0:/dev/accel/accel0 \
 	--cap-add=NET_ADMIN \
 	--ulimit memlock=-1 \
-	-v $(pwd):/host \
+	-v $(pwd):/host:Z \
 	npueval \
 	bash -c "cd /host && python3 scripts/check_xrt_versions.py  && python3 $1"

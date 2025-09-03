@@ -8,12 +8,10 @@ WORKDIR /IRON
 COPY docker/setup.sh /IRON/
 COPY docker/entrypoint.sh /entrypoint.sh
 
-# Set environment variable to suppress prompts in scripts
-ENV DEBIAN_FRONTEND=noninteractive
 SHELL ["/bin/bash", "-l", "-c"]
 
 # Install XDNA driver
-RUN dpkg -i /XDNA/debs/xrt_*amdxdna.deb
+RUN dnf install -y /XDNA/rpms/xrt_*amdxdna.rpm
 
 RUN git clone --recursive https://github.com/xilinx/mlir-aie.git /IRON/mlir-aie && \
     cd /IRON/mlir-aie && \
@@ -27,12 +25,6 @@ RUN sed -i '31s/^/#/' /IRON/mlir-aie/utils/quick_setup.sh
 RUN sed -i '61s|.*|pip install mlir_aie -f https://github.com/Xilinx/mlir-aie/releases/download/latest-wheels/mlir_aie-0.0.1.2025051904+c105c0b-cp312-cp312-manylinux_2_35_x86_64.whl|' /IRON/mlir-aie/utils/quick_setup.sh
 
 RUN sed -i '64s|.*|pip install llvm_aie -f https://github.com/Xilinx/llvm-aie/releases/download/nightly/llvm_aie-19.0.0.2025041501+b2a279c1-py3-none-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl|' /IRON/mlir-aie/utils/quick_setup.sh
-
-# IRON requires python venv
-RUN apt -y install python3.12-venv
-
-# Make life easier
-RUN apt -y install vim
 
 # Setup IRON
 RUN cd /IRON/mlir-aie && \

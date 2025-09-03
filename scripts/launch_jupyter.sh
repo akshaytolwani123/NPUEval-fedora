@@ -10,7 +10,7 @@ docker run -it \
     --device=/dev/accel/accel0:/dev/accel/accel0 \
     --cap-add=NET_ADMIN \
     --ulimit memlock=-1 \
-    -v $(pwd):/host \
+    -v $(pwd):/host:Z \
     -p 8888:8888 \
     -e OPENAI_API_KEY=$OPENAI_API_KEY \
     npueval \

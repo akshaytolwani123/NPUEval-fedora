@@ -1,32 +1,41 @@
 # Copyright (C) 2025 Advanced Micro Devices, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 
-ARG BASE_IMAGE=ubuntu:24.04
-FROM ${BASE_IMAGE}
+FROM fedora:latest
 
 WORKDIR /XDNA
 
-# Suppress prompts in scripts
-ENV DEBIAN_FRONTEND=noninteractive
+# Needed to compile on Fedora(-disable-werror in XRT build.sh doesnt disable it for aiebu)
+ENV CXXFLAGS=-Wno-overloaded-virtual
 
-RUN apt-get update && apt-get install -y git curl bash wget
+# Fixes dracut spewing a lot of errors see https://gitlab.com/fedora/bootc/tracker/-/issues/66#note_2590604787
+ENV DRACUT_NO_XATTR=1
+
+# Install XRT deps(same as one in install.sh)
+# No weak deps to reduce container size by not installing firmware
+RUN dnf --setopt=install_weak_deps=False install -y \
+    git openssl jq wget python3.12 gcc-c++ cmake rpm-build \
+    curl-devel boost-devel rapidjson-devel libdrm-devel ocl-icd-devel  \
+    ncurses-devel protobuf-devel python3.12-devel gtest-devel \
+    libuuid-devel systemtap-sdt-devel libstdc++-static \
+    glibc-static python3-pybind11 dkms kernel-headers kernel-devel-matched
 
 COPY docker/build_xdna.sh /XDNA
+
+# Make python3.12 the default so pyxrt builds against it as MLIR-AIE needs 3.12 or 3.10
+RUN alternatives --install /usr/bin/python3 python3 /usr/bin/python3.12 1
 
 # We'll use the XDNA github repo to build both XRT and the XDNA driver
 RUN cd /XDNA && ./build_xdna.sh
 
-# Install XRT deps
-RUN /XDNA/xdna-driver/xrt/src/runtime_src/tools/scripts/xrtdeps.sh -docker
-
 # Install XRT
-RUN dpkg -i /XDNA/xdna-driver/xrt/build/Release/xrt*-base.deb
+RUN dnf install -y /XDNA/xdna-driver/xrt/build/Release/xrt*-base.rpm
 
-# Finally, save the XRT/XDNA debian packages
+# Finally, save the XRT/XDNA rpm packages
 # these will also need to be installed on the host system
-RUN mkdir /XDNA/debs && \
-    cp /XDNA/xdna-driver/build/Release/xrt*-amdxdna.deb /XDNA/debs/ && \
-    cp /XDNA/xdna-driver/xrt/build/Release/xrt*-base.deb /XDNA/debs/
+RUN mkdir /XDNA/rpms && \
+    cp /XDNA/xdna-driver/build/Release/xrt*-amdxdna.rpm /XDNA/rpms/ && \
+    cp /XDNA/xdna-driver/xrt/build/Release/xrt*-base.rpm /XDNA/rpms/
 
 # Cleanup
 RUN rm -rf /XDNA/xdna-driver
